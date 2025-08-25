@@ -10,6 +10,11 @@ class Livro extends Model
     /** @use HasFactory<\Database\Factories\LivroFactory> */
     use HasFactory;
 
+    public function editora()
+    {
+        return $this->belongsTo(Editora::class);
+    }
+
     public function autores()
     {
         return $this->belongsToMany(Autor::class, 'autores_livros');
