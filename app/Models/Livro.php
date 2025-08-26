@@ -10,6 +10,19 @@ class Livro extends Model
     /** @use HasFactory<\Database\Factories\LivroFactory> */
     use HasFactory;
 
+    protected $fillable = [
+        'isbn',
+        'nome',
+        'editora_id',
+        'bibliografia',
+        'capa',
+        'preco',
+    ];
+
+    protected $casts = [
+        'bibliografia' => 'encrypted',
+    ];
+
     public function editora()
     {
         return $this->belongsTo(Editora::class);
@@ -19,13 +32,4 @@ class Livro extends Model
     {
         return $this->belongsToMany(Autor::class, 'autores_livros');
     }
-
-    protected $fillable = [
-        'isbn',
-        'nome',
-        'editora_id',
-        'bibliografia',
-        'capa',
-        'preco',
-    ];
 }

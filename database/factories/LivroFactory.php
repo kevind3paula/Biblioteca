@@ -23,7 +23,7 @@ class LivroFactory extends Factory
     public function configure()
     {
         return $this->afterCreating(function (Livro $livro) {
-            $autores = Autor::factory()->count(2)->create();
+            $autores = Autor::factory()->count($this->faker->numberBetween(1, 3))->create();
             $livro->autores()->attach($autores->pluck('id')->toArray());
         });
     }
@@ -33,7 +33,6 @@ class LivroFactory extends Factory
         return [
             'isbn' => fake()->unique()->isbn13(),
             'nome' => fake()->sentence(3),
-            'editora_id' => Editora::factory(),
             'bibliografia' => fake()->text(),
             'capa' => fake()->imageUrl(350, 400, 'books', true, 'Capa'),
             'preco' => fake()->randomFloat(2, 10, 300),

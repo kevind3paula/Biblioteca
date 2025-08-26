@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Editora;
+use App\Models\Livro;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,6 +18,13 @@ class EditoraFactory extends Factory
      */
 
     protected $model = Editora::class;
+
+    public function configure()
+    {
+        return $this->afterCreating(function (Editora $editora) {
+            $livros = Livro::factory()->count($this->faker->numberBetween(1, 3))->for($editora)->create();
+        });
+    }
 
     public function definition(): array
     {

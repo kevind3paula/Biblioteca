@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('isbn')->unique();
             $table->string('nome');
-            $table->foreignId('editora_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('editora_id')->constrained()->onDelete('cascade');
             $table->longText('bibliografia');
             $table->string('capa');
-            $table->decimal('preco', 8, 2);
+            $table->decimal('preco', 10, 2);
             $table->timestamps();
         });
     }

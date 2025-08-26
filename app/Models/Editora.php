@@ -10,6 +10,11 @@ class Editora extends Model
     /** @use HasFactory<\Database\Factories\EditoraFactory> */
     use HasFactory;
 
+    public function livros()
+    {
+        return $this->hasMany(Livro::class);
+    }
+
     protected $fillable = [
         'nome',
         'logo',
