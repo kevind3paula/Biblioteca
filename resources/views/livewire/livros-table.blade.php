@@ -9,10 +9,10 @@
                     <path d="m21 21-4.3-4.3"></path>
                 </g>
             </svg>
-            <input type="text" wire:model.live="search" placeholder="Search" class="input">
+            <input type="text" wire:model.live="search" placeholder="Search" class="input focus:outline-none">
         </label>
 
-        <select wire:model.live="publisherFilter" class="select select-md">
+        <select wire:model.live="publisherFilter" class="select select-md focus:border-transparent">
             <option value="">Todas as Editoras</option>
             @foreach ($editoras as $editora)
                 <option value="{{ $editora->id }}">{{ $editora->nome }}</option>

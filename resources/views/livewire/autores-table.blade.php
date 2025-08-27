@@ -9,7 +9,7 @@
                     <path d="m21 21-4.3-4.3"></path>
                 </g>
             </svg>
-            <input type="text" wire:model.live="search" placeholder="Search" class="input">
+            <input type="text" wire:model.live="search" placeholder="Search" class="input focus:outline-none">
         </label>
     </div>
 

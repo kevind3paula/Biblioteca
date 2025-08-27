@@ -11,8 +11,7 @@ class Autor extends Model
     use HasFactory;
 
     protected $table = 'autores';
-
-    
+ 
     public function livros()
     {
         return $this->belongsToMany(Livro::class, 'autores_livros');
