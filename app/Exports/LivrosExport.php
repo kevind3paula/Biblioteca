@@ -18,7 +18,7 @@ class LivrosExport implements FromCollection, WithHeadings
                 'ISBN' => $livro->isbn,
                 'Nome' => $livro->nome,
                 'Editora' => $livro->editora->nome ?? '',
-                'Autores' => $livro->autores->pluck('nome')->implode(', '),
+                'Autores' => $livro->autores->pluck('nome')->implode(' | '),
                 'Bibliografia' => $livro->bibliografia,
                 'Peço' => $livro->preco,
             ];

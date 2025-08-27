@@ -18,7 +18,7 @@
             <thead>
                 <tr>
                     <th wire:click="sortBy('nome')" class="cursor-pointer">Nome</th>
-                    <th>logo</th>
+                    <th class="w-1/5">logo</th>
                     <th>Livros</th>
                 </tr>
             </thead>
@@ -27,7 +27,12 @@
                     <tr>
                         <td class="text-sm">{{ $editora->nome }}</td>
                         <td>
-                            <img src="{{ $editora->logo }}" alt="Logo">
+                            <div class="avatar w-1/4">
+                                <div class="rounded-full">
+                                    <img
+                                        src="https://img.wook.pt/images/torto-arado-itamar-vieira-junior/MXwyMjgxODcwMnwxODY5NDMzMHwxNTQ4Mzc0NDAwMDAwfHdlYnA=/502x?ctx=0" />
+                                </div>
+                            </div>
                         </td>
                         <td>
                             @foreach ($editora->livros as $livro)

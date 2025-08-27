@@ -32,8 +32,8 @@
                     <th>Editora</th>
                     <th>Autores</th>
                     <th>Bibliografia</th>
-                    <th>Capa</th>
-                    <th wire:click="sortBy('preco')" class="cursor-pointer">Preço</th>
+                    <th class="w-32">Capa</th>
+                    <th wire:click="sortBy('preco')" class="cursor-pointer w-32">Preço</th>
                 </tr>
             </thead>
             <tbody>
@@ -49,10 +49,10 @@
                         </td>
                         <td>{{ $livro->bibliografia }}</td>
                         <td>
-                            <!--<img src="" alt="capa" class="rounded-xl w-24">-->
-                            <div class="avatar">
-                                <div class="w-2/5 rounded-full">
-                                    <img src="{{ $livro->capa }}" />
+                            <div class="avatar w-1/2">
+                                <div class="rounded-full">
+                                    <img
+                                        src="https://img.wook.pt/images/torto-arado-itamar-vieira-junior/MXwyMjgxODcwMnwxODY5NDMzMHwxNTQ4Mzc0NDAwMDAwfHdlYnA=/502x?ctx=0" />
                                 </div>
                             </div>
                         </td>

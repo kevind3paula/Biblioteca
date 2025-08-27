@@ -15,8 +15,5 @@ class Editora extends Model
         return $this->hasMany(Livro::class);
     }
 
-    protected $fillable = [
-        'nome',
-        'logo',
-    ];
+    protected $fillable = ['nome', 'logo'];
 }
