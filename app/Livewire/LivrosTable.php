@@ -38,7 +38,8 @@ class LivrosTable extends Component
     {
         $query = Livro::with(['editora', 'autores'])->when($this->search, function ($q) {
             $q->where(function ($q2) {
-                $q2->where('nome', 'like', "%{$this->search}%")->orWhere('isbn', 'like', "%{$this->search}%");
+                $q2->where('nome', 'like', "%{$this->search}%")
+                ->orWhere('isbn', 'like', "%{$this->search}%");
             });
         })->when($this->publisherFilter, function ($q) {
             $q->where('editora_id', $this->publisherFilter);

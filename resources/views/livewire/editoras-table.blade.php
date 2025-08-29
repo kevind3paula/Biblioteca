@@ -1,51 +1,38 @@
-<div class="p-4">
-    <div class="flex flex-row mb-4">
-        <h2 class="text-2xl font-bold self-center mx-4">Editoras</h2>
+<div class="p-6">
+    <x-div_filter>
+        <x-table_title>Editoras</x-table_title>
 
-        <label class="input mr-4">
-            <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none" stroke="currentColor">
-                    <circle cx="11" cy="11" r="8"></circle>
-                    <path d="m21 21-4.3-4.3"></path>
-                </g>
-            </svg>
-            <input type="text" wire:model.live="search" placeholder="Search" class="input focus:outline-none">
-        </label>
-    </div>
+        <x-search_input></x-search_input>
+    </x-div_filter>
 
-    <div class="overflow-x-auto">
-        <table class="table table-zebra table-pin-rows table-pin-cols">
-            <thead>
-                <tr>
-                    <th wire:click="sortBy('nome')" class="cursor-pointer">Nome</th>
-                    <th class="w-1/5">logo</th>
-                    <th>Livros</th>
+    <x-div_table>
+        <x-table>
+            <x-thead>
+                <tr class="text-base">
+                    <x-th_arrow filter="nome" class="1/3">
+                        Nome
+                    </x-th_arrow>
+                    <x-th_table class="w-1/3">Logo</x-th_table>
+                    <x-th_table class="w-1/3">Livros</x-th_table>
                 </tr>
-            </thead>
-            <tbody>
+            </x-thead>
+            <x-tbody>
                 @forelse ($editoras as $editora)
-                    <tr>
-                        <td class="text-sm">{{ $editora->nome }}</td>
-                        <td>
-                            <div class="avatar w-1/4">
-                                <div class="rounded-full">
-                                    <img
-                                        src="https://img.wook.pt/images/torto-arado-itamar-vieira-junior/MXwyMjgxODcwMnwxODY5NDMzMHwxNTQ4Mzc0NDAwMDAwfHdlYnA=/502x?ctx=0" />
-                                </div>
-                            </div>
-                        </td>
-                        <td>
+                    <tr class="hover:bg-gray-50">
+                        <x-td_table class="px-6 py-4 font-medium text-gray-900">{{ $editora->nome }}</x-td_table>
+                        <x-img_td class="w-32">
+                            https://img.wook.pt/images/torto-arado-itamar-vieira-junior/MXwyMjgxODcwMnwxODY5NDMzMHwxNTQ4Mzc0NDAwMDAwfHdlYnA=/502x?ctx=0
+                        </x-img_td>
+                        <x-td_table>
                             @foreach ($editora->livros as $livro)
-                                <span class="badge badge-primary">{{ $livro->nome }}</span>
+                                <x-span_badge>{{ $livro->nome }}</x-span_badge>
                             @endforeach
-                        </td>
+                        </x-td_table>
                     </tr>
                 @empty
-                    <tr>
-                        <td colspan="5" class="text-center">Nenhum Livro Encontrado</td>
-                    </tr>
+                    <x-empty_search colspan="3">Nenhuma Editora ou Livro Encontrado</x-empty_search>
                 @endforelse
-            </tbody>
-        </table>
-    </div>
+            </x-tbody>
+        </x-table>
+    </x-div_table>
 </div>

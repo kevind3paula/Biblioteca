@@ -1,18 +1,10 @@
 <div class="p-2">
-    <div class="flex flex-row mb-4 relative">
-        <h2 class="text-2xl font-bold self-center mx-4">Livros</h2>
+    <x-div_filter>
+        <x-table_title class="">Livros</x-table_title>
 
-        <label class="input mr-4">
-            <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none" stroke="currentColor">
-                    <circle cx="11" cy="11" r="8"></circle>
-                    <path d="m21 21-4.3-4.3"></path>
-                </g>
-            </svg>
-            <input type="text" wire:model.live="search" placeholder="Search" class="input focus:outline-none">
-        </label>
+        <x-search_input></x-search_input>
 
-        <select wire:model.live="publisherFilter" class="select select-md focus:border-transparent">
+        <select wire:model.live="publisherFilter" class="select select-md focus:border-transparent rounded-full">
             <option value="">Todas as Editoras</option>
             @foreach ($editoras as $editora)
                 <option value="{{ $editora->id }}">{{ $editora->nome }}</option>
@@ -21,49 +13,48 @@
         <div class="self-center absolute right-10">
             <a href="{{ route('livros.export') }}" class="btn btn-soft btn-primary">Exportar Tabela</a>
         </div>
-    </div>
+    </x-div_filter>
 
-    <div class="overflow-x-auto">
-        <table class="table table-zebra table-sm table-pin-rows table-pin-cols">
-            <thead>
-                <tr>
-                    <th wire:click="sortBy('isbn')" class="cursor-pointer">ISBN</th>
-                    <th wire:click="sortBy('nome')" class="cursor-pointer">Nome</th>
-                    <th>Editora</th>
-                    <th>Autores</th>
-                    <th>Bibliografia</th>
-                    <th class="w-32">Capa</th>
-                    <th wire:click="sortBy('preco')" class="cursor-pointer w-32">Preço</th>
+    <x-div_table>
+        <x-table>
+            <x-thead>
+                <tr class="text-base">
+                    <x-th_arrow filter="isbn">
+                        ISBN
+                    </x-th_arrow>
+                    <x-th_arrow filter="nome">
+                        Nome
+                    </x-th_arrow>
+                    <x-th_table>Editora</x-th_table>
+                    <x-th_table>Autores</x-th_table>
+                    <x-th_table class="w-1/4">Bibliografia</x-th_table>
+                    <x-th_table class="w-32">Capa</x-th_table>
+                    <x-th_arrow filter="preco" class="w-32">
+                        Preço
+                    </x-th_arrow>
                 </tr>
-            </thead>
-            <tbody>
+            </x-thead>
+            <x-tbody>
                 @forelse ($livros as $livro)
-                    <tr>
-                        <td class="text-sm">{{ $livro->isbn }}</td>
-                        <td class="text-sm">{{ $livro->nome }}</td>
-                        <td class="text-sm">{{ $livro->editora->nome }}</td>
+                    <tr class="hover:bg-gray-50">
+                        <x-td_table>{{ $livro->isbn }}</x-td_table>
+                        <x-td_table class="px-6 py-4 font-medium text-gray-900">{{ $livro->nome }}</x-td_table>
+                        <x-td_table>{{ $livro->editora->nome }}</x-td_table>
                         <td>
                             @foreach ($livro->autores as $autor)
-                                <span class="badge badge-primary mb-1">{{ $autor->nome }}</span>
+                                <x-span_badge>{{ $autor->nome }}</x-span_badge>
                             @endforeach
                         </td>
                         <td>{{ $livro->bibliografia }}</td>
-                        <td>
-                            <div class="avatar w-1/2">
-                                <div class="rounded-full">
-                                    <img
-                                        src="https://img.wook.pt/images/torto-arado-itamar-vieira-junior/MXwyMjgxODcwMnwxODY5NDMzMHwxNTQ4Mzc0NDAwMDAwfHdlYnA=/502x?ctx=0" />
-                                </div>
-                            </div>
-                        </td>
-                        <td class="text-sm">{{ $livro->preco }}</td>
+                        <x-img_td class="w-md">
+                            https://img.wook.pt/images/torto-arado-itamar-vieira-junior/MXwyMjgxODcwMnwxODY5NDMzMHwxNTQ4Mzc0NDAwMDAwfHdlYnA=/502x?ctx=0
+                        </x-img_td>
+                        <x-td_table class="px-6 py-4 font-medium text-gray-900">€{{ $livro->preco }}</x-td_table>
                     </tr>
                 @empty
-                    <tr>
-                        <td colspan="5" class="text-center">Nenhum Livro Encontrado</td>
-                    </tr>
+                    <x-empty_search colspan="7">Nenhum Livro Encontrado</x-empty_search>
                 @endforelse
-            </tbody>
-        </table>
-    </div>
+            </x-tbody>
+        </x-table>
+    </x-div_table>
 </div>
